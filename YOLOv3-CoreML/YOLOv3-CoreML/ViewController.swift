@@ -208,31 +208,36 @@ class ViewController: UIViewController {
   func show(predictions: [YOLO.Prediction]) {
     for i in 0..<boundingBoxes.count {
       if i < predictions.count {
+        
         let prediction = predictions[i]
-
-        // The predicted bounding box is in the coordinate space of the input
-        // image, which is a square image of 416x416 pixels. We want to show it
-        // on the video preview, which is as wide as the screen and has a 4:3
-        // aspect ratio. The video preview also may be letterboxed at the top
-        // and bottom.
-        let width = view.bounds.width
-        let height = width * 4 / 3
-        let scaleX = width / CGFloat(YOLO.inputWidth)
-        let scaleY = height / CGFloat(YOLO.inputHeight)
-        let top = (view.bounds.height - height) / 2
-
-        // Translate and scale the rectangle to our own coordinate system.
-        var rect = prediction.rect
-        rect.origin.x *= scaleX
-        rect.origin.y *= scaleY
-        rect.origin.y += top
-        rect.size.width *= scaleX
-        rect.size.height *= scaleY
-
-        // Show the bounding box.
-        let label = String(format: "%@ %.1f", labels[prediction.classIndex], prediction.score * 100)
-        let color = colors[prediction.classIndex]
-        boundingBoxes[i].show(frame: rect, label: label, color: color)
+        
+        if prediction.classIndex == 0 {
+            // The predicted bounding box is in the coordinate space of the input
+            // image, which is a square image of 416x416 pixels. We want to show it
+            // on the video preview, which is as wide as the screen and has a 4:3
+            // aspect ratio. The video preview also may be letterboxed at the top
+            // and bottom.
+            let width = view.bounds.width
+            let height = width * 4 / 3
+            let scaleX = width / CGFloat(YOLO.inputWidth)
+            let scaleY = height / CGFloat(YOLO.inputHeight)
+            let top = (view.bounds.height - height) / 2
+            
+            // Translate and scale the rectangle to our own coordinate system.
+            var rect = prediction.rect
+            rect.origin.x *= scaleX
+            rect.origin.y *= scaleY
+            rect.origin.y += top
+            rect.size.width *= scaleX
+            rect.size.height *= scaleY
+            
+            // Show the bounding box.
+            let label = String(format: "%@ %.1f", labels[prediction.classIndex], prediction.score * 100)
+            let color = colors[prediction.classIndex]
+            boundingBoxes[i].show(frame: rect, label: label, color: color)
+        } else {
+            boundingBoxes[i].hide()
+        }
       } else {
         boundingBoxes[i].hide()
       }

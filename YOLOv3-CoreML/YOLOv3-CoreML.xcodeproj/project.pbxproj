@@ -289,7 +289,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer: 1067837450@qq.com (EA34W5QFTF)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = LXGRKDMEQU;
+				DEVELOPMENT_TEAM = ZWQWGRSN4T;
 				GCC_OPTIMIZATION_LEVEL = s;
 				INFOPLIST_FILE = "YOLOv3-CoreML/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -309,7 +309,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer: 1067837450@qq.com (EA34W5QFTF)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = LXGRKDMEQU;
+				DEVELOPMENT_TEAM = ZWQWGRSN4T;
 				INFOPLIST_FILE = "YOLOv3-CoreML/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "net.machinethink.YOLOv3-CoreML";
