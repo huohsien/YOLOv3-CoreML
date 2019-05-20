@@ -206,12 +206,27 @@ class ViewController: UIViewController {
   }
 
   func show(predictions: [YOLO.Prediction]) {
+    
+    var personIndex = -1
+    var personScore:Float = 0.0
+    
     for i in 0..<boundingBoxes.count {
-      if i < predictions.count {
+        if i < predictions.count {
+            let prediction = predictions[i]
+            if prediction.classIndex == 0 { // prediciting person
+                if prediction.score > personScore {
+                    personIndex = i
+                    personScore = prediction.score
+                }
+            }
+        }
+    }
+    for i in 0..<boundingBoxes.count {
+
+      if i == personIndex {
         
         let prediction = predictions[i]
         
-        if prediction.classIndex == 0 {
             // The predicted bounding box is in the coordinate space of the input
             // image, which is a square image of 416x416 pixels. We want to show it
             // on the video preview, which is as wide as the screen and has a 4:3
@@ -235,9 +250,7 @@ class ViewController: UIViewController {
             let label = String(format: "%@ %.1f", labels[prediction.classIndex], prediction.score * 100)
             let color = colors[prediction.classIndex]
             boundingBoxes[i].show(frame: rect, label: label, color: color)
-        } else {
-            boundingBoxes[i].hide()
-        }
+
       } else {
         boundingBoxes[i].hide()
       }
