@@ -44,4 +44,6 @@ __pycache__/
 
 # Model files
 YOLOv3-CoreML/YOLOv3-CoreML/Yolov3.mlmodel
+YOLOv3-CoreML/YOLOv3-CoreML/YOLOv3.mlmodel
+
 
