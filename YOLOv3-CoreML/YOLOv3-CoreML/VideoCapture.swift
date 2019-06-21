@@ -49,7 +49,7 @@ public class VideoCapture: NSObject {
 
     let previewLayer = AVCaptureVideoPreviewLayer(session: captureSession)
     previewLayer.videoGravity = AVLayerVideoGravity.resizeAspect
-    previewLayer.connection?.videoOrientation = .portrait
+    previewLayer.connection?.videoOrientation = .landscapeRight
     self.previewLayer = previewLayer
 
     let settings: [String : Any] = [
@@ -65,7 +65,7 @@ public class VideoCapture: NSObject {
 
     // We want the buffers to be in portrait orientation otherwise they are
     // rotated by 90 degrees. Need to set this _after_ addOutput()!
-    videoOutput.connection(with: AVMediaType.video)?.videoOrientation = .portrait
+    videoOutput.connection(with: AVMediaType.video)?.videoOrientation = .landscapeRight
 
     captureSession.commitConfiguration()
     return true
@@ -94,6 +94,9 @@ extension VideoCapture: AVCaptureVideoDataOutputSampleBufferDelegate {
     if deltaTime >= CMTimeMake(1, Int32(fps)) {
       lastTimestamp = timestamp
       let imageBuffer = CMSampleBufferGetImageBuffer(sampleBuffer)
+        // need to rotate inageBuffer
+        // ???
+        
       delegate?.videoCapture(self, didCaptureVideoFrame: imageBuffer, timestamp: timestamp)
     }
   }

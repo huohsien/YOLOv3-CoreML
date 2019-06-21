@@ -140,6 +140,7 @@ class ViewController: UIViewController {
     let ciImage = CIImage(cvPixelBuffer: pixelBuffer)
     let sx = CGFloat(YOLO.inputWidth) / CGFloat(CVPixelBufferGetWidth(pixelBuffer))
     let sy = CGFloat(YOLO.inputHeight) / CGFloat(CVPixelBufferGetHeight(pixelBuffer))
+
     let scaleTransform = CGAffineTransform(scaleX: sx, y: sy)
     let scaledImage = ciImage.transformed(by: scaleTransform)
     ciContext.render(scaledImage, to: resizedPixelBuffer)
@@ -232,22 +233,26 @@ class ViewController: UIViewController {
             // on the video preview, which is as wide as the screen and has a 4:3
             // aspect ratio. The video preview also may be letterboxed at the top
             // and bottom.
-            let width = view.bounds.width
-            let height = width * 4 / 3
+
+            let height = view.bounds.height
+            let width = height * 4 / 3
+
+        
             let scaleX = width / CGFloat(YOLO.inputWidth)
             let scaleY = height / CGFloat(YOLO.inputHeight)
-            let top = (view.bounds.height - height) / 2
-            
+            let left = (view.bounds.width - width) / 2
+
             // Translate and scale the rectangle to our own coordinate system.
             var rect = prediction.rect
             rect.origin.x *= scaleX
             rect.origin.y *= scaleY
-            rect.origin.y += top
             rect.size.width *= scaleX
             rect.size.height *= scaleY
+            rect.origin.x = width - (rect.origin.x + rect.size.width) + left
             
             // Show the bounding box.
-            let label = String(format: "%@ %.1f", labels[prediction.classIndex], prediction.score * 100)
+//            let label = String(format: "%@ %.1f", labels[prediction.classIndex], prediction.score * 100)
+            let label = String(format: "%.1f", prediction.score * 100)
             let color = colors[prediction.classIndex]
             boundingBoxes[i].show(frame: rect, label: label, color: color)
 

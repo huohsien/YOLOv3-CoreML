@@ -33,7 +33,7 @@ class BoundingBox {
     shapeLayer.strokeColor = color.cgColor
     shapeLayer.isHidden = false
 
-    textLayer.string = label
+    textLayer.string = ""
     textLayer.backgroundColor = color.cgColor
     textLayer.isHidden = false
 
