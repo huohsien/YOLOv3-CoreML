@@ -241,14 +241,14 @@ class ViewController: UIViewController {
             let scaleX = width / CGFloat(YOLO.inputWidth)
             let scaleY = height / CGFloat(YOLO.inputHeight)
             let left = (view.bounds.width - width) / 2
-
+            print("left=\(left) width=\(width) view.bounds.width=\(view.bounds.width) view.bounds.height=\(view.bounds.height)")
             // Translate and scale the rectangle to our own coordinate system.
             var rect = prediction.rect
             rect.origin.x *= scaleX
             rect.origin.y *= scaleY
             rect.size.width *= scaleX
             rect.size.height *= scaleY
-            rect.origin.x = width - (rect.origin.x + rect.size.width) + left
+            rect.origin.x = width - (rect.origin.x + rect.size.width)
             
             // Show the bounding box.
 //            let label = String(format: "%@ %.1f", labels[prediction.classIndex], prediction.score * 100)
